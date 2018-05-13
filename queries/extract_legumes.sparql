@@ -1,0 +1,17 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX oio: <http://www.geneontology.org/formats/oboInOwl#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+
+CONSTRUCT {   
+    ?to ?p ?o .
+    ?co ?p1 ?o1
+}  
+WHERE {  
+    ?co rdfs:subClassOf* ?to .
+	FILTER(regex(str(?co), "CO_341|CO_339|CO_336"))
+	?to ?p ?o . 
+	?co ?p1 ?o1 .
+	FILTER (!isBlank(?o))
+}
